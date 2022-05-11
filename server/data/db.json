@@ -1,0 +1,10 @@
+{
+  "ids": {
+    "User": 2
+  },
+  "models": {
+    "User": {
+      "1": "{\"userName\":\"yasin  hamid\",\"password\":\"123334\",\"email\":\"yasin@gmail.com\",\"tel\":\"097746\",\"addresse\":\"Rabat Al Irfan\",\"stationsFrequentes\":[\"agdal\"],\"BusNo\":\"string\",\"additionalProp1\":{},\"userId\":\"1\"}"
+    }
+  }
+}
