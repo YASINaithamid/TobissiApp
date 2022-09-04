@@ -1,66 +1,52 @@
-import {Entity, model, property, hasMany} from '@loopback/repository';
-import {Vehicule} from './vehicule.model';
+import {Entity, model, property} from '@loopback/repository';
 
-@model({settings: {strict: false}})
+@model({settings: {hidden: ['password', 'tokenRefreshedAt']}})
 export class User extends Entity {
   @property({
     type: 'string',
-    required: true,
-  })
-  userName: string;
-
-  @property({
-    type: 'string',
-    required: true,
-  })
-  password: string;
-
-  @property({
-    type: 'string',
-    required: true,
-  })
-  email: string;
-
-  @property({
-    type: 'string',
-  })
-  tel?: string;
-
-  @property({
-    type: 'string',
-  })
-  addresse?: string;
-
-  @property({
-    type: 'array',
-    itemType: 'string',
-  })
-  stationsFrequentes?: string[];
-
-  @property({
-    type: 'string',
-  })
-  BusNo?: string;
-
-  @property({
-    type: 'string',
     id: true,
+
     generated: true,
   })
-  userId?: string;
-
-  @hasMany(() => Vehicule)
-  vehicules: Vehicule[];
+  id: string;
 
   @property({
     type: 'string',
+    required: true,
   })
-  vehiculeId?: string;
-  // Define well-known properties here
+  username?: string;
 
-  // Indexer property to allow additional data
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  [prop: string]: any;
+  @property({
+    type: 'string',
+    required: true,
+  })
+  password?: string;
+  @property({
+    type: 'string',
+    required: false,
+  })
+  phone?: string;
+
+  @property({
+    type: 'string',
+    required: true,
+    jsonSchema: {
+      format: 'email',
+    },
+    index: {
+      unique: true,
+    },
+  })
+  email?: string;
+  @property({
+    type: 'number',
+  })
+  tokenRefreshedAt: number;
+  @property({
+    type: 'number',
+    required: false,
+  })
+  role?: number;
 
   constructor(data?: Partial<User>) {
     super(data);

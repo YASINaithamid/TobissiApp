@@ -105,7 +105,7 @@ export class StationController {
     },
   })
   async findById(
-    @param.path.number('id') id: number,
+    @param.path.string('id') id: string,
     @param.filter(Station, {exclude: 'where'}) filter?: FilterExcludingWhere<Station>
   ): Promise<Station> {
     return this.stationRepository.findById(id, filter);
@@ -116,7 +116,7 @@ export class StationController {
     description: 'Station PATCH success',
   })
   async updateById(
-    @param.path.number('id') id: number,
+    @param.path.string('id') id: string,
     @requestBody({
       content: {
         'application/json': {
@@ -134,7 +134,7 @@ export class StationController {
     description: 'Station PUT success',
   })
   async replaceById(
-    @param.path.number('id') id: number,
+    @param.path.string('id') id: string,
     @requestBody() station: Station,
   ): Promise<void> {
     await this.stationRepository.replaceById(id, station);
@@ -144,7 +144,7 @@ export class StationController {
   @response(204, {
     description: 'Station DELETE success',
   })
-  async deleteById(@param.path.number('id') id: number): Promise<void> {
+  async deleteById(@param.path.string('id') id: string): Promise<void> {
     await this.stationRepository.deleteById(id);
   }
 }

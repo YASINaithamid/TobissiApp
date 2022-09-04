@@ -1,7 +1,7 @@
 import {Entity, model, property} from '@loopback/repository';
 
-@model({settings: {strict: false}})
-export class Station extends Entity {
+@model({settings: {strict: true}})
+export class Line extends Entity {
   @property({
     type: 'string',
     id: true,
@@ -16,23 +16,35 @@ export class Station extends Entity {
   name: string;
 
   @property({
-    type: 'number',
+    type: 'array',
+    itemType: 'object',
     required: true,
   })
-  latitude: number;
+  polyline: object[];
 
   @property({
-    type: 'number',
+    type: 'string',
+    default: 10,
+  })
+  num?: string;
+
+  @property({
+    type: 'object',
     required: true,
   })
-  longitude: number;
+  terminusA: object;
 
+  @property({
+    type: 'object',
+    required: true,
+  })
+  terminusB: object;
   @property({
     type: 'array',
     itemType: 'string',
     required: true,
   })
-  linesList: object[];
+  listStation: object[];
 
   // Define well-known properties here
 
@@ -40,13 +52,13 @@ export class Station extends Entity {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [prop: string]: any;
 
-  constructor(data?: Partial<Station>) {
+  constructor(data?: Partial<Line>) {
     super(data);
   }
 }
 
-export interface StationRelations {
+export interface LineRelations {
   // describe navigational properties here
 }
 
-export type StationWithRelations = Station & StationRelations;
+export type LineWithRelations = Line & LineRelations;

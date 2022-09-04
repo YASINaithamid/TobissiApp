@@ -1,7 +1,7 @@
 {
-  "name": "pfetracking",
+  "name": "middle_example",
   "version": "0.0.1",
-  "description": "pfetracking",
+  "description": "test de la solution middle",
   "keywords": [
     "loopback-application",
     "loopback"
@@ -9,7 +9,7 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "engines": {
-    "node": "12 || 14 || 16 || 17"
+    "node": ">=10.16"
   },
   "scripts": {
     "build": "lb-tsc",
@@ -25,22 +25,22 @@
     "test": "lb-mocha --allow-console-logs \"dist/__tests__\"",
     "posttest": "npm run lint",
     "test:dev": "lb-mocha --allow-console-logs dist/__tests__/**/*.js && npm run posttest",
-    "docker:build": "docker build -t pfetracking .",
-    "docker:run": "docker run -p 3000:3000 -d pfetracking",
+    "docker:build": "docker build -t middle_example .",
+    "docker:run": "docker run -p 3000:3000 -d middle_example",
     "premigrate": "npm run build",
     "migrate": "node ./dist/migrate",
     "preopenapi-spec": "npm run build",
     "openapi-spec": "node ./dist/openapi-spec",
+    "rebuild": "npm run clean && npm run build",
     "prestart": "npm run rebuild",
-    "start": "node -r source-map-support/register .",
-    "clean": "lb-clean dist *.tsbuildinfo .eslintcache",
-    "rebuild": "npm run clean && npm run build"
+    "start": "node -r dotenv/config -r source-map-support/register .",
+    "clean": "lb-clean dist *.tsbuildinfo .eslintcache"
   },
   "repository": {
     "type": "git",
     "url": ""
   },
-  "author": "",
+  "author": "abdelmounaim bougaze <abdelmounaim.bougaze@gmail.com>",
   "license": "",
   "files": [
     "README.md",
@@ -49,21 +49,28 @@
     "!*/__tests__"
   ],
   "dependencies": {
-    "@loopback/boot": "^4.1.2",
-    "@loopback/core": "^3.1.2",
-    "@loopback/repository": "^4.1.2",
-    "@loopback/rest": "^11.1.2",
-    "@loopback/rest-explorer": "^4.1.2",
-    "@loopback/service-proxy": "^4.1.2",
+    "@loopback/authentication": "^7.0.6",
+    "@loopback/authentication-jwt": "^0.7.6",
+    "@loopback/boot": "^3.2.0",
+    "@loopback/core": "^2.14.0",
+    "@loopback/repository": "^3.4.0",
+    "@loopback/rest": "^9.1.2",
+    "@loopback/rest-explorer": "^5.0.3",
+    "@loopback/service-proxy": "^3.0.6",
+    "bcryptjs": "^2.4.3",
+    "debug": "^4.3.4",
+    "dotenv": "^8.2.0",
+    "loopback-connector-mongodb": "^5.5.0",
+    "socketio": "^1.0.0",
     "tslib": "^2.0.0"
   },
   "devDependencies": {
-    "@loopback/build": "^8.1.2",
-    "source-map-support": "^0.5.21",
-    "@loopback/testlab": "^4.1.2",
-    "@types/node": "^12.20.47",
-    "@loopback/eslint-config": "^12.0.4",
-    "eslint": "^8.10.0",
-    "typescript": "~4.6.3"
+    "@loopback/build": "^6.2.9",
+    "@loopback/eslint-config": "^10.0.5",
+    "@loopback/testlab": "^3.2.11",
+    "@types/node": "^10.17.51",
+    "eslint": "^7.18.0",
+    "source-map-support": "^0.5.19",
+    "typescript": "~4.1.3"
   }
 }

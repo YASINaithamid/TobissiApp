@@ -1,22 +1,16 @@
-import {inject, Getter} from '@loopback/core';
-import {DefaultCrudRepository, repository, HasManyRepositoryFactory} from '@loopback/repository';
-import {DbDataSource} from '../datasources';
-import {User, UserRelations, Vehicule} from '../models';
-import {VehiculeRepository} from './vehicule.repository';
+import {inject} from '@loopback/core';
+import {DefaultCrudRepository} from '@loopback/repository';
+import {MongoDataSource} from '../datasources';
+import {User, UserRelations} from '../models';
 
 export class UserRepository extends DefaultCrudRepository<
   User,
-  typeof User.prototype.userId,
+  typeof User.prototype.id,
   UserRelations
 > {
-
-  public readonly vehicules: HasManyRepositoryFactory<Vehicule, typeof User.prototype.userId>;
-
   constructor(
-    @inject('datasources.db') dataSource: DbDataSource, @repository.getter('VehiculeRepository') protected vehiculeRepositoryGetter: Getter<VehiculeRepository>,
+    @inject('datasources.mongo') dataSource: MongoDataSource,
   ) {
     super(User, dataSource);
-    this.vehicules = this.createHasManyRepositoryFactoryFor('vehicules', vehiculeRepositoryGetter,);
-    this.registerInclusionResolver('vehicules', this.vehicules.inclusionResolver);
   }
 }

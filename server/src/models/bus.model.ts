@@ -1,13 +1,14 @@
 import {Entity, model, property} from '@loopback/repository';
 
-@model({settings: {strict: false}})
-export class Station extends Entity {
+@model({settings: {strict: true}})
+export class Bus extends Entity {
   @property({
     type: 'string',
     id: true,
+
     generated: true,
   })
-  id?: string;
+  id: string;
 
   @property({
     type: 'string',
@@ -16,23 +17,34 @@ export class Station extends Entity {
   name: string;
 
   @property({
-    type: 'number',
+    type: 'string',
     required: true,
   })
-  latitude: number;
+  modelbus: string;
 
   @property({
-    type: 'number',
+    type: 'string',
     required: true,
   })
-  longitude: number;
+  busNumber: string;
 
   @property({
+    type: 'string',
+    required: false,
+  })
+  city: string;
+
+  @property({
+    type: 'string',
+    required: false,
+  })
+  line: string;
+
+  /* @property({
     type: 'array',
     itemType: 'string',
-    required: true,
   })
-  linesList: object[];
+  linesList?: string[]; */
 
   // Define well-known properties here
 
@@ -40,13 +52,13 @@ export class Station extends Entity {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [prop: string]: any;
 
-  constructor(data?: Partial<Station>) {
+  constructor(data?: Partial<Bus>) {
     super(data);
   }
 }
 
-export interface StationRelations {
+export interface BusRelations {
   // describe navigational properties here
 }
 
-export type StationWithRelations = Station & StationRelations;
+export type BusWithRelations = Bus & BusRelations;

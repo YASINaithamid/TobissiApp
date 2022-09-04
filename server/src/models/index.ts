@@ -1,5 +1,4 @@
 export * from './user.model';
-export * from './vehicule.model';
-export * from './ligne.model';
+export * from './bus.model';
 export * from './station.model';
-export * from './history.model';
+export * from './line.model';

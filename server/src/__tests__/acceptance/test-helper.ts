@@ -1,4 +1,4 @@
-import {PfetrackingApplication} from '../..';
+import {Middle} from '../..';
 import {
   createRestAppClient,
   givenHttpServerConfig,
@@ -14,7 +14,7 @@ export async function setupApplication(): Promise<AppWithClient> {
     // port: +process.env.PORT,
   });
 
-  const app = new PfetrackingApplication({
+  const app = new Middle({
     rest: restConfig,
   });
 
@@ -27,6 +27,6 @@ export async function setupApplication(): Promise<AppWithClient> {
 }
 
 export interface AppWithClient {
-  app: PfetrackingApplication;
+  app: Middle;
   client: Client;
 }

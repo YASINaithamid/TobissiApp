@@ -1,10 +1,10 @@
-import {PfetrackingApplication} from './application';
+import {Middle} from './application';
 
 export async function migrate(args: string[]) {
   const existingSchema = args.includes('--rebuild') ? 'drop' : 'alter';
   console.log('Migrating schemas (%s existing schema)', existingSchema);
 
-  const app = new PfetrackingApplication();
+  const app = new Middle();
   await app.boot();
   await app.migrateSchema({existingSchema});
 
