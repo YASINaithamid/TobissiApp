@@ -84,7 +84,7 @@ export class BusController {
           schema: getModelSchemaRef(Bus, {partial: true}),
         },
       },
-    })
+    })//
     bus: Bus,
     @param.where(Bus) where?: Where<Bus>,
   ): Promise<Count> {
